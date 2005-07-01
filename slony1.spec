@@ -1,8 +1,4 @@
 #
-# Conditional build:
-%bcond_with	tests		# build with tests
-%bcond_without	tests		# build without tests
-#
 # TODO:
 #	- trigger for upgrading
 #		e.g. stop slony1, warn user. No automatic upgrade possible (must be done all all nodes)
@@ -51,12 +47,10 @@ Slony-I jest przeznaczony dla system闚, gdzie normalny tryb pracy
 wymaga aby zar闚no serwer g堯wny jak i wszystkie serwery pomocnicze
 by造 ca造 czas operacyjne.
 
-
 %prep
 %setup -q 
 
 %build
-#%%{__libtoolize}
 %{__aclocal} -I config
 %{__autoconf}
 %configure
@@ -64,7 +58,7 @@ by造 ca造 czas operacyjne.
 
 %install
 rm -rf $RPM_BUILD_ROOT
-install -d $RPM_BUILD_ROOT{/etc/rc.d/init.d/,/etc/sysconfig/slony1,/home/services/slony1}
+install -d $RPM_BUILD_ROOT{/etc/rc.d/init.d,/etc/sysconfig/slony1,/home/services/slony1}
 
 %{__make} install \
 	DESTDIR=$RPM_BUILD_ROOT
