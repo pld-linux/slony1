@@ -15,6 +15,7 @@ Source0:	http://developer.postgresql.org/~wieck/slony1/download/%{name}-%{versio
 Source1:	%{name}.init
 Source2:	%{name}.pgpass
 Source3:	%{name}.sysconfig
+Patch0:		%{name}-no_server_for_build.patch
 URL:		http://slony.info/
 BuildRequires:	autoconf
 BuildRequires:	automake
@@ -49,12 +50,15 @@ wymaga aby zarówno serwer g³ówny jak i wszystkie serwery pomocnicze
 by³y ca³y czas operacyjne.
 
 %prep
-%setup -q 
+%setup -q
+%patch0 -p1
 
 %build
 %{__aclocal} -I config
 %{__autoconf}
-%configure
+cp /usr/share/automake/config.* config
+%configure \
+	--with-pgsharedir=%{_pgsqldir}
 %{__make}
 
 %install
