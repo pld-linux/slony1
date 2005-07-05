@@ -18,6 +18,7 @@ Source3:	%{name}.sysconfig
 URL:		http://slony.info/
 BuildRequires:	autoconf
 BuildRequires:	automake
+BuildRequires:	postgresql-backend-devel
 Conflicts: 	postgresql <= 8.0.3-3
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
