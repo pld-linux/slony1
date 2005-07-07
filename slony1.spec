@@ -2,12 +2,14 @@
 # TODO:
 #	- trigger for upgrading
 #		e.g. stop slony1, warn user. No automatic upgrade possible (must be done all all nodes)
+#	- move slony-tools.pm to some better place
 #
+%include	/usr/lib/rpm/macros.perl
 Summary:	Slony-I - a "master to multiple slaves" replication system for PostgreSQL
 Summary(pl):	Slony-I - system replikacji dla PostgreSQL
 Name:		slony1
 Version:	1.1.0
-Release:	0.1
+Release:	0.2
 Epoch:		0
 License:	BSD
 Group:		Applications/Databases
@@ -17,6 +19,7 @@ Source2:	%{name}.pgpass
 Source3:	%{name}.sysconfig
 Patch0:		%{name}-no_server_for_build.patch
 URL:		http://slony.info/
+BuildRequires:	rpm-perlprov
 BuildRequires:	autoconf
 BuildRequires:	automake
 BuildRequires:	postgresql-backend-devel
@@ -25,6 +28,8 @@ BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
 %define		_pgmoduledir	%{_libdir}/postgresql
 %define		_pgsqldir	%{_datadir}/postgresql
+
+%define         _noautoreq      '%{_libdir}//slon-tools.pm'
 
 %description
 Slony-I is a "master to multiple slaves" replication system with
@@ -49,21 +54,45 @@ Slony-I jest przeznaczony dla systemów, gdzie normalny tryb pracy
 wymaga aby zarówno serwer g³ówny jak i wszystkie serwery pomocnicze
 by³y ca³y czas operacyjne.
 
+%package altperl
+Summary:	Perl scripts for managing Slony-I
+Group:		Applications/Databases
+Requires:	perl-modules
+Requires:	%{name} = %{epoch}:%{version}-%{release}
+
+%description altperl
+The altperl scripts provide an alternate method of managing Slony-I,
+generating slonik scripts and monitoring slon daemons.  They support an
+arbitrary number of Slony-I nodes in clusters of various shapes and
+sizes.
+
+%package tools
+Summary:	Usefull additional scripts for Slony-I
+Group:		Applications/Databases
+Requires:	perl-modules
+Requires:	%{name} = %{epoch}:%{version}-%{release}
+
+%description tools
+This package contains some additional scripts provided wyth Slony-I,
+usefull Slony-I setup, maintainance or monitoring.
+
 %prep
 %setup -q
 %patch0 -p1
+sed -i -e 's,^#!/usr/bin/env perl,^#!/usr/bin/perl,' tools/*.pl
 
 %build
 %{__aclocal} -I config
 %{__autoconf}
 cp /usr/share/automake/config.* config
 %configure \
-	--with-pgsharedir=%{_pgsqldir}
+	--with-pgsharedir=%{_pgsqldir} \
+	--with-perltools
 %{__make}
 
 %install
 rm -rf $RPM_BUILD_ROOT
-install -d $RPM_BUILD_ROOT{/etc/rc.d/init.d,/etc/sysconfig/slony1,/home/services/slony1}
+install -d $RPM_BUILD_ROOT{/etc/rc.d/init.d,/etc/sysconfig,/home/services/slony1}
 
 %{__make} install \
 	DESTDIR=$RPM_BUILD_ROOT
@@ -71,6 +100,8 @@ install -d $RPM_BUILD_ROOT{/etc/rc.d/init.d,/etc/sysconfig/slony1,/home/services
 install %{SOURCE1} $RPM_BUILD_ROOT/etc/rc.d/init.d/slony1
 install %{SOURCE2} $RPM_BUILD_ROOT/home/services/slony1/.pgpass
 install %{SOURCE3} $RPM_BUILD_ROOT/etc/sysconfig/slony1
+mv $RPM_BUILD_ROOT%{_sysconfdir}/slon_tools.conf{-sample,}
+install tools/{check_*.sh,generate_syncs.sh,slony1_*.sh,slony_setup.pl} $RPM_BUILD_ROOT%{_bindir}
 
 %clean
 rm -rf $RPM_BUILD_ROOT
@@ -98,10 +129,26 @@ fi
 %files
 %defattr(644,root,root,755)
 %doc HISTORY-1.1 README SAMPLE TODO UPGRADING doc/adminguide/prebuilt/* doc/*/*.txt
-%attr(755,root,root) %{_bindir}/*
+%attr(755,root,root) %{_bindir}/slon
+%attr(755,root,root) %{_bindir}/slonik
 %attr(755,root,root) %{_pgmoduledir}/*.so
 %{_pgsqldir}/*
 %attr(754,root,root) /etc/rc.d/init.d/%{name}
 %config(noreplace) %verify(not md5 mtime size) /etc/sysconfig/%{name}
 %attr(750,slony1,slony1) %dir /home/services/slony1
 %attr(600,slony1,slony1) /home/services/slony1/.pgpass
+
+%files altperl
+%defattr(644,root,root,755)
+%attr(755,root,root) %{_bindir}/slonik_*
+%attr(755,root,root) %{_bindir}/slon_*
+%attr(755,root,root) %{_bindir}/slony_*
+%attr(755,root,root) %{_bindir}/show_configuration
+%{_libdir}/*.pm
+%{_sysconfdir}/slon_tools.conf
+
+%files tools
+%defattr(644,root,root,755)
+%doc tools/README*
+%attr(755,root,root) %{_bindir}/*.sh
+%attr(755,root,root) %{_bindir}/*.pl
