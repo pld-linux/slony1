@@ -56,25 +56,37 @@ by³y ca³y czas operacyjne.
 
 %package altperl
 Summary:	Perl scripts for managing Slony-I
+Summary(pl):	Skrypty perlowe do zarz±dzania Slony-I
 Group:		Applications/Databases
 Requires:	perl-modules
 Requires:	%{name} = %{epoch}:%{version}-%{release}
 
 %description altperl
 The altperl scripts provide an alternate method of managing Slony-I,
-generating slonik scripts and monitoring slon daemons.  They support an
+generating slonik scripts and monitoring slon daemons. They support an
 arbitrary number of Slony-I nodes in clusters of various shapes and
 sizes.
 
+%description altperl -l pl
+Skrypty altperl dostarczaj± alternatywn± metodê zarz±dzania Slony-I,
+generuj±c skrypty slonik i monitoruj±c demony slon. Obs³uguj± dowoln±
+liczbê wêz³ów Slony-I w klastrach ró¿nych kszta³tów i rozmiarów.
+
 %package tools
-Summary:	Usefull additional scripts for Slony-I
+Summary:	Useful additional scripts for Slony-I
+Summary(pl):	Przydatne dodatkowe skrypty dla Slony-I
 Group:		Applications/Databases
 Requires:	perl-modules
 Requires:	%{name} = %{epoch}:%{version}-%{release}
 
 %description tools
-This package contains some additional scripts provided wyth Slony-I,
-usefull Slony-I setup, maintainance or monitoring.
+This package contains some additional scripts provided with Slony-I,
+useful for Slony-I setup, maintainance or monitoring.
+
+%description tools -l pl
+Ten pakiet dostarcza ró¿ne dodatkowe skrypty zawarte w ¼ród³ach
+Slony-I, przydatne do konfiguracji, zarz±dzania i monitorowania tym
+systemem.
 
 %prep
 %setup -q
