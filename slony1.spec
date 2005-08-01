@@ -14,6 +14,7 @@ Epoch:		0
 License:	BSD
 Group:		Applications/Databases
 Source0:	http://developer.postgresql.org/~wieck/slony1/download/%{name}-%{version}.tar.bz2
+# Source0-md5:	a2d738840dc2ce5fc3f7fa27c5a434dc
 Source1:	%{name}.init
 Source2:	%{name}.pgpass
 Source3:	%{name}.sysconfig
