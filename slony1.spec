@@ -9,7 +9,7 @@ Summary:	Slony-I - a "master to multiple slaves" replication system for PostgreS
 Summary(pl):	Slony-I - system replikacji dla PostgreSQL
 Name:		slony1
 Version:	1.1.2
-Release:	0.2
+Release:	1
 Epoch:		0
 License:	BSD
 Group:		Applications/Databases
