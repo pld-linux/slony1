@@ -20,6 +20,7 @@ Source2:	%{name}.pgpass
 Source3:	%{name}.sysconfig
 Patch0:		%{name}-no_server_for_build.patch
 Patch1:		%{name}-log_shipping_reliability.patch
+Patch2:		%{name}-echo_backslashes.patch
 URL:		http://slony.info/
 BuildRequires:	rpm-perlprov
 BuildRequires:	autoconf
@@ -94,6 +95,7 @@ systemem.
 %setup -q
 %patch0 -p1
 %patch1 -p1
+%patch2 -p1
 sed -i -e 's,^#!/usr/bin/env perl,^#!/usr/bin/perl,' tools/*.pl
 
 %build
