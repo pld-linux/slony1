@@ -9,20 +9,15 @@ Summary:	Slony-I - a "master to multiple slaves" replication system for PostgreS
 Summary(pl):	Slony-I - system replikacji dla PostgreSQL
 Name:		slony1
 Version:	1.1.5
-%define pre rc3
-Release:	0.%{pre}.1
+Release:	1
 Epoch:		0
 License:	BSD
 Group:		Applications/Databases
-Source0:	http://developer.postgresql.org/~wieck/slony1/download/%{name}-%{version}-%{pre}.tar.bz2
-# Source0-md5:	cea68f6e80f83ba95179b121d0ac9632
+Source0:	http://developer.postgresql.org/~wieck/slony1/download/%{name}-%{version}.tar.bz2
+# Source0-md5:	d3ffff50323f1413b9b81084f906f9f8
 Source1:	%{name}.init
 Source2:	%{name}.pgpass
 Source3:	%{name}.sysconfig
-Patch0:		%{name}-no_server_for_build.patch
-Patch1:		%{name}-log_shipping_reliability.patch
-Patch2:		%{name}-echo_backslashes.patch
-Patch3:		%{name}-setsyncTracking_offline_params.patch
 URL:		http://slony.info/
 BuildRequires:	rpm-perlprov
 BuildRequires:	autoconf
@@ -94,11 +89,7 @@ Slony-I, przydatne do konfiguracji, zarz±dzania i monitorowania tym
 systemem.
 
 %prep
-%setup -q -n %{name}-%{version}-%{pre}
-#%patch0 -p1
-#%patch1 -p1
-#%patch2 -p1
-#%patch3 -p1
+%setup -q -n %{name}-%{version}
 sed -i -e 's,^#!/usr/bin/env perl,^#!/usr/bin/perl,' tools/*.pl
 
 %build
