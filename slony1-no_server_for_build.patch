@@ -1,11 +1,10 @@
-diff -dur -x '*~' slony1-1.1.0.orig/config/acx_libpq.m4 slony1-1.1.0/config/acx_libpq.m4
---- slony1-1.1.0.orig/config/acx_libpq.m4	2005-06-14 17:59:05.000000000 +0200
-+++ slony1-1.1.0/config/acx_libpq.m4	2005-07-05 15:23:39.000000000 +0200
+--- slony1-1.1.5/config/acx_libpq.m4.orig	2005-11-01 21:33:04.000000000 +0100
++++ slony1-1.1.5/config/acx_libpq.m4	2006-01-27 11:07:42.000000000 +0100
 @@ -185,43 +185,7 @@
      )
  fi
  
--LDFLAGS="$TEMP_FLAGS -L$PG_PKGLIBDIR"
+-LDFLAGS="$TEMP_LDFLAGS -L$PG_PKGLIBDIR"
 -AC_MSG_CHECKING(for plpgsql.so)
 -if test -s $PG_PKGLIBDIR"/plpgsql.so"; then
 -    AC_MSG_RESULT(yes)
@@ -44,5 +43,5 @@ diff -dur -x '*~' slony1-1.1.0.orig/config/acx_libpq.m4 slony1-1.1.0/config/acx_
 -fi
 +PG_SHAREDIR="${with_pgsharedir}"
  
- LDFLAGS="$TEMP_FLAGS -L$PG_LIBDIR"
+ LDFLAGS="$TEMP_LDFLAGS -L$PG_LIBDIR"
  
