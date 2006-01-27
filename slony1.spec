@@ -18,6 +18,7 @@ Source0:	http://developer.postgresql.org/~wieck/slony1/download/%{name}-%{versio
 Source1:	%{name}.init
 Source2:	%{name}.pgpass
 Source3:	%{name}.sysconfig
+Patch0:		%{name}-no_server_for_build.patch
 URL:		http://slony.info/
 BuildRequires:	rpm-perlprov
 BuildRequires:	autoconf
@@ -89,7 +90,9 @@ Slony-I, przydatne do konfiguracji, zarz±dzania i monitorowania tym
 systemem.
 
 %prep
-%setup -q -n %{name}-%{version}
+%setup -q
+%patch0 -p1
+
 sed -i -e 's,^#!/usr/bin/env perl,^#!/usr/bin/perl,' tools/*.pl
 
 %build
