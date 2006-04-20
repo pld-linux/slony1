@@ -20,11 +20,14 @@ Source2:	%{name}.pgpass
 Source3:	%{name}.sysconfig
 Patch0:		%{name}-no_server_for_build.patch
 URL:		http://slony.info/
-BuildRequires:	rpm-perlprov
 BuildRequires:	autoconf
 BuildRequires:	automake
 BuildRequires:	postgresql-backend-devel
-Conflicts: 	postgresql <= 8.0.3-3
+BuildRequires:	rpm-perlprov
+BuildRequires:	rpmbuild(macros) >= 1.268
+Requires(post,preun):	/sbin/chkconfig
+Requires:	rc-scripts
+Conflicts:	postgresql <= 8.0.3-3
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
 %define		_pgmoduledir	%{_libdir}/postgresql
@@ -41,7 +44,7 @@ system that includes all features and capabilities needed to replicate
 large databases to a reasonably limited number of slave systems.
 
 Slony-I is a system for data centers and backup sites, where the
-normal mode of operation is that all nodes are available. 
+normal mode of operation is that all nodes are available.
 
 %description -l pl
 Slony-I jest systemem replikacji dla PostgreSQL. Pozwala na replikacjê
@@ -59,8 +62,8 @@ by³y ca³y czas operacyjne.
 Summary:	Perl scripts for managing Slony-I
 Summary(pl):	Skrypty perlowe do zarz±dzania Slony-I
 Group:		Applications/Databases
-Requires:	perl-modules
 Requires:	%{name} = %{epoch}:%{version}-%{release}
+Requires:	perl-modules
 
 %description altperl
 The altperl scripts provide an alternate method of managing Slony-I,
@@ -77,8 +80,8 @@ liczbê wêz³ów Slony-I w klastrach ró¿nych kszta³tów i rozmiarów.
 Summary:	Useful additional scripts for Slony-I
 Summary(pl):	Przydatne dodatkowe skrypty dla Slony-I
 Group:		Applications/Databases
-Requires:	perl-modules
 Requires:	%{name} = %{epoch}:%{version}-%{release}
+Requires:	perl-modules
 
 %description tools
 This package contains some additional scripts provided with Slony-I,
@@ -126,17 +129,11 @@ rm -rf $RPM_BUILD_ROOT
 
 %post
 /sbin/chkconfig --add slony1
-if [ -f /var/lock/subsys/slony1 ]; then
-	/etc/rc.d/init.d/slony1 restart >&2 || :
-else
-	echo "Run \"/etc/rc.d/init.d/slony1 start\" to start slony1 replicator."
-fi
+%service slony1 restart "slony1 replicator"
 
 %preun
 if [ "$1" = "0" ]; then
-	if [ -f /var/lock/subsys/slony1 ]; then
-		/etc/rc.d/init.d/slony1 stop
-	fi
+	%service slony1 stop
 	/sbin/chkconfig --del slony1
 fi
 
