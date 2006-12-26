@@ -9,7 +9,7 @@ Summary:	Slony-I - a "master to multiple slaves" replication system for PostgreS
 Summary(pl):	Slony-I - system replikacji dla PostgreSQL
 Name:		slony1
 Version:	1.1.5
-Release:	2
+Release:	3
 Epoch:		0
 License:	BSD
 Group:		Applications/Databases
@@ -19,10 +19,11 @@ Source1:	%{name}.init
 Source2:	%{name}.pgpass
 Source3:	%{name}.sysconfig
 Patch0:		%{name}-no_server_for_build.patch
+Patch1:		%{name}-pgsql82.patch
 URL:		http://slony.info/
 BuildRequires:	autoconf
 BuildRequires:	automake
-BuildRequires:	postgresql-backend-devel
+BuildRequires:	postgresql-backend-devel >= 8.2.0
 BuildRequires:	rpm-perlprov
 BuildRequires:	rpmbuild(macros) >= 1.268
 Requires(post,preun):	/sbin/chkconfig
@@ -95,6 +96,7 @@ systemem.
 %prep
 %setup -q
 %patch0 -p1
+%patch1 -p1
 
 sed -i -e 's,^#!/usr/bin/env perl,^#!/usr/bin/perl,' tools/*.pl
 
