@@ -24,6 +24,7 @@ URL:		http://slony.info/
 BuildRequires:	autoconf
 BuildRequires:	automake
 BuildRequires:	postgresql-backend-devel >= 8.2.0
+# for libpgport.a (move to postgresql-backend-devel?)
 BuildRequires:	postgresql-static >= 8.2.0
 BuildRequires:	rpm-perlprov
 BuildRequires:	rpmbuild(macros) >= 1.268
