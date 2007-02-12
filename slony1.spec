@@ -6,7 +6,7 @@
 #
 %include	/usr/lib/rpm/macros.perl
 Summary:	Slony-I - a "master to multiple slaves" replication system for PostgreSQL
-Summary(pl):	Slony-I - system replikacji dla PostgreSQL
+Summary(pl.UTF-8):   Slony-I - system replikacji dla PostgreSQL
 Name:		slony1
 Version:	1.1.6
 Release:	1
@@ -49,21 +49,21 @@ large databases to a reasonably limited number of slave systems.
 Slony-I is a system for data centers and backup sites, where the
 normal mode of operation is that all nodes are available.
 
-%description -l pl
-Slony-I jest systemem replikacji dla PostgreSQL. Pozwala na replikacjê
-typu "jeden serwer g³owny, wiele serwerów pomocniczych".
+%description -l pl.UTF-8
+Slony-I jest systemem replikacji dla PostgreSQL. Pozwala na replikacjÄ™
+typu "jeden serwer gÅ‚owny, wiele serwerÃ³w pomocniczych".
 
-G³ówn± zalet± Slony-I jest system "master-slave". Zawiera on wszelk±
-funkcjonalno¶æ potrzebn± do replikowania du¿ych baz danych na
-okre¶lon± ilo¶æ serwerów pomocniczych lub zastêpczych.
+GÅ‚Ã³wnÄ… zaletÄ… Slony-I jest system "master-slave". Zawiera on wszelkÄ…
+funkcjonalnoÅ›Ä‡ potrzebnÄ… do replikowania duÅ¼ych baz danych na
+okreÅ›lonÄ… iloÅ›Ä‡ serwerÃ³w pomocniczych lub zastÄ™pczych.
 
-Slony-I jest przeznaczony dla systemów, gdzie normalny tryb pracy
-wymaga aby zarówno serwer g³ówny jak i wszystkie serwery pomocnicze
-by³y ca³y czas operacyjne.
+Slony-I jest przeznaczony dla systemÃ³w, gdzie normalny tryb pracy
+wymaga aby zarÃ³wno serwer gÅ‚Ã³wny jak i wszystkie serwery pomocnicze
+byÅ‚y caÅ‚y czas operacyjne.
 
 %package altperl
 Summary:	Perl scripts for managing Slony-I
-Summary(pl):	Skrypty perlowe do zarz±dzania Slony-I
+Summary(pl.UTF-8):   Skrypty perlowe do zarzÄ…dzania Slony-I
 Group:		Applications/Databases
 Requires:	%{name} = %{epoch}:%{version}-%{release}
 Requires:	perl-modules
@@ -74,14 +74,14 @@ generating slonik scripts and monitoring slon daemons. They support an
 arbitrary number of Slony-I nodes in clusters of various shapes and
 sizes.
 
-%description altperl -l pl
-Skrypty altperl dostarczaj± alternatywn± metodê zarz±dzania Slony-I,
-generuj±c skrypty slonik i monitoruj±c demony slon. Obs³uguj± dowoln±
-liczbê wêz³ów Slony-I w klastrach ró¿nych kszta³tów i rozmiarów.
+%description altperl -l pl.UTF-8
+Skrypty altperl dostarczajÄ… alternatywnÄ… metodÄ™ zarzÄ…dzania Slony-I,
+generujÄ…c skrypty slonik i monitorujÄ…c demony slon. ObsÅ‚ugujÄ… dowolnÄ…
+liczbÄ™ wÄ™zÅ‚Ã³w Slony-I w klastrach rÃ³Å¼nych ksztaÅ‚tÃ³w i rozmiarÃ³w.
 
 %package tools
 Summary:	Useful additional scripts for Slony-I
-Summary(pl):	Przydatne dodatkowe skrypty dla Slony-I
+Summary(pl.UTF-8):   Przydatne dodatkowe skrypty dla Slony-I
 Group:		Applications/Databases
 Requires:	%{name} = %{epoch}:%{version}-%{release}
 Requires:	perl-modules
@@ -90,9 +90,9 @@ Requires:	perl-modules
 This package contains some additional scripts provided with Slony-I,
 useful for Slony-I setup, maintainance or monitoring.
 
-%description tools -l pl
-Ten pakiet dostarcza ró¿ne dodatkowe skrypty zawarte w ¼ród³ach
-Slony-I, przydatne do konfiguracji, zarz±dzania i monitorowania tym
+%description tools -l pl.UTF-8
+Ten pakiet dostarcza rÃ³Å¼ne dodatkowe skrypty zawarte w ÅºrÃ³dÅ‚ach
+Slony-I, przydatne do konfiguracji, zarzÄ…dzania i monitorowania tym
 systemem.
 
 %prep
