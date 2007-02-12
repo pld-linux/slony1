@@ -6,7 +6,7 @@
 #
 %include	/usr/lib/rpm/macros.perl
 Summary:	Slony-I - a "master to multiple slaves" replication system for PostgreSQL
-Summary(pl.UTF-8):   Slony-I - system replikacji dla PostgreSQL
+Summary(pl.UTF-8):	Slony-I - system replikacji dla PostgreSQL
 Name:		slony1
 Version:	1.1.6
 Release:	1
@@ -63,7 +63,7 @@ były cały czas operacyjne.
 
 %package altperl
 Summary:	Perl scripts for managing Slony-I
-Summary(pl.UTF-8):   Skrypty perlowe do zarządzania Slony-I
+Summary(pl.UTF-8):	Skrypty perlowe do zarządzania Slony-I
 Group:		Applications/Databases
 Requires:	%{name} = %{epoch}:%{version}-%{release}
 Requires:	perl-modules
@@ -81,7 +81,7 @@ liczbę węzłów Slony-I w klastrach różnych kształtów i rozmiarów.
 
 %package tools
 Summary:	Useful additional scripts for Slony-I
-Summary(pl.UTF-8):   Przydatne dodatkowe skrypty dla Slony-I
+Summary(pl.UTF-8):	Przydatne dodatkowe skrypty dla Slony-I
 Group:		Applications/Databases
 Requires:	%{name} = %{epoch}:%{version}-%{release}
 Requires:	perl-modules
