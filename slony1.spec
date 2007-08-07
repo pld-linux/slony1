@@ -3,23 +3,22 @@
 #	- trigger for upgrading
 #		e.g. stop slony1, warn user. No automatic upgrade possible (must be done all all nodes)
 #	- move slony-tools.pm to some better place
+#	- there is pre-release 1.2.11 version 
 #
 %include	/usr/lib/rpm/macros.perl
 Summary:	Slony-I - a "master to multiple slaves" replication system for PostgreSQL
 Summary(pl.UTF-8):	Slony-I - system replikacji dla PostgreSQL
 Name:		slony1
-Version:	1.1.6
+Version:	1.2.10
 Release:	1
 Epoch:		0
 License:	BSD
 Group:		Applications/Databases
-Source0:	http://pgfoundry.org/frs/download.php/1166/%{name}-%{version}.tar.bz2
-# Source0-md5:	5ca8456e0b4ba27f8a16d0dc04f15c40
+Source0:	http://slony.info/downloads/1.2/source/%{name}-%{version}.tar.bz2
+# Source0-md5:	80ab5608c070028134072e4ecba5817f
 Source1:	%{name}.init
 Source2:	%{name}.pgpass
 Source3:	%{name}.sysconfig
-Patch0:		%{name}-no_server_for_build.patch
-Patch1:		%{name}-pgsql82.patch
 URL:		http://slony.info/
 BuildRequires:	autoconf
 BuildRequires:	automake
@@ -97,8 +96,6 @@ systemem.
 
 %prep
 %setup -q
-%patch0 -p1
-%patch1 -p1
 
 sed -i -e 's,^#!/usr/bin/env perl,^#!/usr/bin/perl,' tools/*.pl
 
@@ -122,7 +119,7 @@ install %{SOURCE1} $RPM_BUILD_ROOT/etc/rc.d/init.d/slony1
 install %{SOURCE2} $RPM_BUILD_ROOT/home/services/slony1/.pgpass
 install %{SOURCE3} $RPM_BUILD_ROOT/etc/sysconfig/slony1
 mv $RPM_BUILD_ROOT%{_sysconfdir}/slon_tools.conf{-sample,}
-install tools/{check_*.sh,generate_syncs.sh,slony1_*.sh,slony_setup.pl} $RPM_BUILD_ROOT%{_bindir}
+install tools/{check_*.sh,generate_syncs.sh,slony1_*.sh} $RPM_BUILD_ROOT%{_bindir}
 
 %clean
 rm -rf $RPM_BUILD_ROOT
@@ -166,4 +163,3 @@ fi
 %defattr(644,root,root,755)
 %doc tools/README*
 %attr(755,root,root) %{_bindir}/*.sh
-%attr(755,root,root) %{_bindir}/*.pl
