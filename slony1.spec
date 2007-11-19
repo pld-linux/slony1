@@ -9,13 +9,13 @@
 Summary:	Slony-I - a "master to multiple slaves" replication system for PostgreSQL
 Summary(pl.UTF-8):	Slony-I - system replikacji dla PostgreSQL
 Name:		slony1
-Version:	1.2.10
+Version:	1.2.12
 Release:	1
 Epoch:		0
 License:	BSD
 Group:		Applications/Databases
 Source0:	http://slony.info/downloads/1.2/source/%{name}-%{version}.tar.bz2
-# Source0-md5:	80ab5608c070028134072e4ecba5817f
+# Source0-md5:	ab395815cb120ee3b7227ba027d7b627
 Source1:	%{name}.init
 Source2:	%{name}.pgpass
 Source3:	%{name}.sysconfig
@@ -24,6 +24,7 @@ BuildRequires:	autoconf
 BuildRequires:	automake
 BuildRequires:	postgresql-backend-devel >= 8.2.0
 # for libpgport.a (move to postgresql-backend-devel?)
+BuildRequires:	postgresql-module-plpgsql >= 8.2.0
 BuildRequires:	postgresql-static >= 8.2.0
 BuildRequires:	rpm-perlprov
 BuildRequires:	rpmbuild(macros) >= 1.268
