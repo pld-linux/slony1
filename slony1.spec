@@ -1,20 +1,20 @@
-#
 # TODO:
-#	- trigger for upgrading
-#		e.g. stop slony1, warn user. No automatic upgrade possible (must be done all all nodes)
-#	- move slony-tools.pm to some better place
+# - trigger for upgrading
+#   e.g. stop slony1, warn user. No automatic upgrade possible (must be done all all nodes)
+# - move slony-tools.pm to some better place
+# - there is 1.2 line - upgrade it
 #
 %include	/usr/lib/rpm/macros.perl
 Summary:	Slony-I - a "master to multiple slaves" replication system for PostgreSQL
 Summary(pl.UTF-8):	Slony-I - system replikacji dla PostgreSQL
 Name:		slony1
-Version:	1.1.6
+Version:	1.1.9
 Release:	1
 Epoch:		0
 License:	BSD
 Group:		Applications/Databases
-Source0:	http://pgfoundry.org/frs/download.php/1166/%{name}-%{version}.tar.bz2
-# Source0-md5:	5ca8456e0b4ba27f8a16d0dc04f15c40
+Source0:	http://main.slony.info/downloads/1.1/source/%{name}-%{version}.tar.bz2
+# Source0-md5:	267a733408aeaae48ce514e309fc4dab
 Source1:	%{name}.init
 Source2:	%{name}.pgpass
 Source3:	%{name}.sysconfig
