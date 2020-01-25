@@ -4,7 +4,6 @@
 # - move slony-tools.pm to some better place
 # - there is 1.2 line - upgrade it
 #
-%include	/usr/lib/rpm/macros.perl
 Summary:	Slony-I - a "master to multiple slaves" replication system for PostgreSQL
 Summary(pl.UTF-8):	Slony-I - system replikacji dla PostgreSQL
 Name:		slony1
